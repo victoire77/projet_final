@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<!--
+    Auteurs : THOMAS Eliott, ROCHER Salomé, FEFEU Marie
+
+    Ce programme fait jouer un joueur contre l'ordinateur à un jeu de pierre feuille ciseaux
+-->
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title> Pierre Feuille Ciseau </title>
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/brython@3.11.0/brython.min.js">
+    </script>
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/brython@3.11.0/brython_stdlib.js">
+    </script>
+    <link href="pierre_feuille_ciseaux.css" rel="stylesheet" />
+</head>
+
+<body onload="brython()">
+<script type="text/python">
+
+# Import des modules
+from browser import document, html
+import random
+
+# Définition des fonctions
+def ordi():
+    '''
+    Rôle : renvoie le jeu de l'ordi
+    Sortie : choix_ordi, chaînes de caractères
+    '''
+    choix = ("pierre", "feuille", "ciseaux")
+    choix_ordi = random.choice(choix)
+    return choix_ordi
+
+def reponse_pierre(evt):
+    '''
+    Rôle : Gère l'affichage et le résultat par appel de fonction 
+    si le joueur choisi pierre
+    '''
+    choix_joueur = "pierre"
+    affichage_pierre()
+    affichage_ordi(choix_ordi)
+    jeu(choix_joueur, choix_ordi)
+
+def reponse_feuille(evt):
+    '''
+    Rôle : Gère l'affichage et le résultat par appel de fonction 
+    si le joueur choisi feuille
+    '''
+    choix_joueur = "feuille"
+    affichage_feuille()
+    affichage_ordi(choix_ordi)
+    jeu(choix_joueur, choix_ordi)
+
+def reponse_ciseaux(evt):
+    '''
+    Rôle : Gère l'affichage et le résultat par appel de fonction 
+    si le joueur choisi ciseaux
+    '''
+    choix_joueur = "ciseaux"
+    affichage_ciseaux()
+    affichage_ordi(choix_ordi)
+    jeu(choix_joueur, choix_ordi)
+
+def jeu(choix_joueur, choix_ordi):  
+    '''
+    Rôle : Donne l'issue de la partie
+    Entrées : choix_joueur, chaînes de caractères
+              choix_ordi, chaînes de caractères
+    '''
+    if choix_ordi == choix_joueur:
+        document['resultat'].textContent = "Egalité !"   
+
+    elif choix_joueur == "pierre" and choix_ordi == "ciseaux":
+        document['resultat'].textContent = "Gagné !"
+    elif choix_joueur == "ciseaux" and choix_ordi == "feuille":
+        document['resultat'].textContent = "Gagné !"
+    elif choix_joueur == "feuille" and choix_ordi == "pierre":
+        document['resultat'].textContent = "Gagné !"
+
+    else:
+        document['resultat'].textContent = "Perdu !"    
+
+def affichage_pierre(): 
+    '''
+    Rôle : ne plus afficher les boutons feuille et ciseaux du joueur
+    '''
+    del document['feuille_joueur']
+    del document['ciseaux_joueur']
+
+def affichage_feuille():
+    '''
+    Rôle : ne plus afficher les boutons pierre et ciseaux du joueur
+    '''
+    del document['pierre_joueur']
+    del document['ciseaux_joueur']
+
+def affichage_ciseaux():
+    '''
+    Rôle : ne plus afficher les boutons pierre et feuille du joueur
+    '''
+    del document['feuille_joueur']
+    del document['pierre_joueur']
+
+def affichage_ordi(choix_ordi):
+    '''
+    Rôle : Ne plus afficher les boutons qui ne sont pas en rapport avec le 
+    choix de l'ordinateur
+    '''
+    if choix_ordi == "pierre":
+        document['choix_ordi'].textContent = "Pierre"
+    if choix_ordi == "feuille":
+        document['choix_ordi'].textContent = "Feuille"
+    if choix_ordi == "ciseaux":
+        document['choix_ordi'].textContent = "Ciseaux"
+
+def refresh(evt):
+    document['rejouer'] <= html.META(http_equiv = 'Refresh' , content = '0.1')
+
+# Programme principal
+choix_ordi = ordi() # Détermine le choix de l'ordinateur
+
+document['pierre_joueur'].bind('click', reponse_pierre)
+document['feuille_joueur'].bind('click', reponse_feuille)
+document['ciseaux_joueur'].bind('click', reponse_ciseaux)
+document['rejouer'].bind('click', refresh)
+</script>
+
+<h1><div id="ordi">Ordinateur</div></h1>
+
+
+<div class="box">
+    <div id="ordinateur">
+        <button name="button" id="choix_ordi">Choix de l'ordinateur</button> 
+    </div>
+    <div id="player">
+        <div id="player_button">
+        <button name="button" id="pierre_joueur">pierre</button>
+        <button name="button" id="feuille_joueur">feuille</button>
+        <button name="button" id="ciseaux_joueur">ciseaux</button> 
+        </div>
+    </div>
+</div>
+
+<h1><div id="joueur">Joueur</div></h1>
+
+<div id="resultat"></div>
+<button name="button" id="rejouer">Rejouer ?</button> 
+</body>
+</html>
