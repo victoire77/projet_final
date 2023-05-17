@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Snake Game</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('snake_fond.jpg');
+            background-size: cover;
+            background-position: center;
+
+        }
+        #game-board {
+            width: 400px;
+            height: 400px;
+            border: 1px solid #000;
+            position: relative;
+        }
+        
+        .snake-body {
+            width: 20px;
+            height: 20px;
+            background-color: #000;
+            position: absolute;
+        }
+        
+        .food {
+            width: 20px;
+            height: 20px;
+            background-color: #f00;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-board"></div>
+    
+    <script>
+
+        const gameSize = 20;
+        
+        const gameBoard = document.getElementById('game-board');
+        
+        let snake = [
+            { x: 10, y: 10 },
+        ];
+        
+        let food = { x: 5, y: 5 };
+        
+        let direction = { x: 0, y: 0 };
+
+        setInterval(updateGame, 200);
+        
+        function updateGame() {
+            const head = { x: snake[0].x + direction.x, y: snake[0].y + direction.y };
+            snake.unshift(head);
+            
+            if (head.x === food.x && head.y === food.y) {
+                food.x = Math.floor(Math.random() * gameSize);
+                food.y = Math.floor(Math.random() * gameSize);
+            } else {
+                snake.pop();
+            }
+            
+            if (head.x < 0 || head.x >= gameSize || head.y < 0 || head.y >= gameSize) {
+                clearInterval(updateGame);
+                alert('Game Over');
+            }
+
+            gameBoard.innerHTML = '';
+            
+            snake.forEach(bodyPart => {
+                const bodyElement = document.createElement('div');
+                bodyElement.style.left = bodyPart.x * 20 + 'px';
+                bodyElement.style.top = bodyPart.y * 20 + 'px';
+                bodyElement.classList.add('snake-body');
+                gameBoard.appendChild(bodyElement);
+            });
+            
+            const foodElement = document.createElement('div');
+            foodElement.style.left = food.x * 20 + 'px';
+            foodElement.style.top = food.y * 20 + 'px';
+            foodElement.classList.add('food');
+            gameBoard.appendChild(foodElement);
+        }
+
+        document.addEventListener('keydown', changeDirection);
+        
+        function changeDirection(event) {
+            if (event.keyCode === 37 && direction.x !== 1) {
+                direction = { x: -1, y: 0 };
+            } else if (event.keyCode === 38 && direction.y !== 1) {
+                direction = { x: 0, y: -1 };
+            } else if (event.keyCode === 39 && direction.x !== -1) {
+                direction = { x: 1, y: 0 };
+            } else if (event.keyCode === 40 && direction.y !== -1) {
+                direction = { x: 0, y: 1 };
+            }
+        }
+    </script>
+</body>
+</html>
