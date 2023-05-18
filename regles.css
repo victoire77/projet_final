@@ -1,0 +1,41 @@
+
+body {
+  font-family: sans-serif;
+  text-indent: 1%;
+}
+
+h1 {
+  color: rgb(63, 108, 118);
+  text-decoration: underline;
+  text-align: center;
+  }
+
+h2 {
+  text-indent: 3%;
+  color:rgb(54, 80, 87);
+    }
+    
+h3 {
+  color: black;
+  text-align: center;
+}
+
+
+  button {
+    font-size: 1.5rem;
+    color: #000000;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 2px solid #000000;
+    background: #ffffff;
+    box-shadow: 3px 3px #000000;
+    cursor: pointer;
+    margin: 35px 0;
+  }
+  
+  button:active {
+    box-shadow: none;
+    transform: translate(3px, 3px);
+  }
+  
