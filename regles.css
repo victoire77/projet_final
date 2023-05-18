@@ -1,0 +1,56 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0px;
+  padding: 0px;
+}
+
+
+header {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+}
+
+h1 {
+  color: rgb(255, 255, 255);
+  text-decoration: underline;
+  text-align: center;
+  }
+
+h2 {
+  text-indent: 3%;
+  color:rgb(54, 80, 87);
+    }
+    
+h3 {
+  color: black;
+  text-align: center;
+}
+
+p {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  color: #000000;
+  line-height: 1.5;
+}
+
+
+  button {
+    font-size: 1.5rem;
+    color: #000000;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 2px solid #000000;
+    background: #ffffff;
+    box-shadow: 3px 3px #000000;
+    cursor: pointer;
+    margin: 35px 0;
+  }
+  
+  button:active {
+    box-shadow: none;
+    transform: translate(3px, 3px);
+  }
+  
