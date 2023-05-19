@@ -1,0 +1,56 @@
+
+body {
+    font-family: sans-serif;
+}
+
+#tableau tr td {
+    border: 2px solid black;
+    vertical-align : middle;
+    text-align : center;
+    width: 40px;
+    height: 40px;
+    font-size: 30;
+    cursor: pointer;
+}
+
+h1{
+    text-indent: 6%;
+}
+
+h2{
+    font-size: 25;
+    text-indent: 12%;
+    color: #167866;
+}
+
+#defaite {
+    font-weight: bold;
+    font-size: 25;
+    color: #c00202;
+}
+
+#rien {
+    font-weight: bold;
+    font-size: 15;
+}
+
+#bouton {
+    font-size: 1.5rem;
+    color: #000000;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 2px solid #000000;
+    background: #ffffff;
+    box-shadow: 3px 3px #000000;
+    cursor: pointer;
+    margin: 35px 0;
+  }
+
+button {
+    font-size: 1.5rem;
+    border: 3px solid #3c4b49;
+    padding: 7px 14px;
+    background: #caf0ed;
+    cursor: pointer;
+}

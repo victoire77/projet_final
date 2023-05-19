@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<!--
+    Auteurs : ROCHER Salomé, THOMAS Eliott, FEFEU Marie
+    Il s'agit de la page du sudoku
+-->
+<html>
+<head>
+    <html lang="fr"></html>
+    <meta charset="utf-8" />
+    <title>Sudoku</title>
+    <link href="sudoku.css" rel="stylesheet" />
+</head>
+
+<body onload="init()">
+</br>
+<h1 id="titre">Sudoku : Niveau 1</h1>
+</br>
+
+<table id="tableau">
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+  <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+</table>
+<div id="rien"></div>
+<h2 id="vie"></h2>
+<div id="defaite"></div>
+</br>
+<button name="button" id="b1">1</button>
+<button name="button" id="b2">2</button>
+<button name="button" id="b3">3</button>
+<button name="button" id="b4">4</button>
+<button name="button" id="b5">5</button>
+<button name="button" id="b6">6</button>
+<button name="button" id="b7">7</button>
+<button name="button" id="b8">8</button>
+<button name="button" id="b9">9</button>
+
+</br>
+<button name="recommencer" id="bouton">Recommencer</button>
+<button name="suivant" id="bouton">Niveau suivant</button>
+<button name="precedent" id="bouton">Niveau précédent</button>
+</br>
+<button onclick="window.location.href = '../page_html_projet.html';">Retour à la page d'acceuil</button>
+
+
+<script type="text/javascript">
+
+  //variables
+  let niveau = 1;
+  let vie = 5;
+
+      function init() {
+
+      //détecte lorsqu'on clique sur une cellule
+      let cellules = obtenirCellules();
+      for (let i = 0; i < cellules.length; i++) {
+          cellules[i].addEventListener("click", clickSurCellule);
+      }
+      //détecte lorsqu'on clique sur les boutons chiffrés
+      let boutons = obtenirBoutons()
+      for (let i = 0; i < boutons.length; i++) {
+        boutons[i].addEventListener("click", afficherChiffre);
+      }
+
+      //détecte lorsqu'on clique sur le bouton "Recommencer"
+      let bouton1 = document.getElementsByName("recommencer");
+      for (let i = 0; i < bouton1.length; i++) {
+        bouton1[i].addEventListener("click", recommencer);}
+
+        //détecte lorsqu'on clique sur le bouton "Niveau suivant"
+        let bouton2 = document.getElementsByName("suivant");
+      for (let i = 0; i < bouton2.length; i++) {
+        bouton2[i].addEventListener("click", suivant);}
+
+        //détecte lorsqu'on clique sur le bouton "Niveau précédent"
+        let bouton3 = document.getElementsByName("precedent");
+      for (let i = 0; i < bouton3.length; i++) {
+        bouton3[i].addEventListener("click", precedent);}
+
+      //Grille qui est par défaut au niveau 1
+      if (titre.innerHTML === "Sudoku : Niveau 1") {
+        cellules[0].id = 0;
+        cellules[1].id = 6;
+        cellules[2].id = 2;
+        cellules[3].id = 5;
+        cellules[4].id = 0;
+        cellules[5].id = 0;
+        cellules[6].id = 3;
+        cellules[7].id = 8;
+        cellules[8].id = 7;
+
+        cellules[9].id = 1;
+        cellules[10].id = 3;
+        cellules[11].id = 0;
+        cellules[12].id = 6;
+        cellules[13].id = 8;
+        cellules[14].id = 0;
+        cellules[15].id = 0;
+        cellules[16].id = 0;
+        cellules[17].id = 0;
+
+        cellules[18].id = 7;
+        cellules[19].id = 0;
+        cellules[20].id = 0;
+        cellules[21].id = 0;
+        cellules[22].id = 0;
+        cellules[23].id = 2;
+        cellules[24].id = 0;
+        cellules[25].id = 0;
+        cellules[26].id = 6;
+
+        cellules[27].id = 0;
+        cellules[28].id = 0;
+        cellules[29].id = 0;
+        cellules[30].id = 7;
+        cellules[31].id = 3;
+        cellules[32].id = 8;
+        cellules[33].id = 2;
+        cellules[34].id = 5;
+        cellules[35].id = 4;
+
+        cellules[36].id = 5;
+        cellules[37].id = 2;
+        cellules[38].id = 0;
+        cellules[39].id = 0;
+        cellules[40].id = 0;
+        cellules[41].id = 0;
+        cellules[42].id = 0;
+        cellules[43].id = 1;
+        cellules[44].id = 8;
+
+        cellules[45].id = 8;
+        cellules[46].id = 7;
+        cellules[47].id = 4;
+        cellules[48].id = 2;
+        cellules[49].id = 1;
+        cellules[50].id = 5;
+        cellules[51].id = 0;
+        cellules[52].id = 0;
+        cellules[53].id = 0;
+
+        cellules[54].id = 9;
+        cellules[55].id = 0;
+        cellules[56].id = 0;
+        cellules[57].id = 4;
+        cellules[58].id = 0;
+        cellules[59].id = 0;
+        cellules[60].id = 0;
+        cellules[61].id = 0;
+        cellules[62].id = 1;
+
+        cellules[63].id = 0;
+        cellules[64].id = 0;
+        cellules[65].id = 0;
+        cellules[66].id = 0;
+        cellules[67].id = 7;
+        cellules[68].id = 9;
+        cellules[69].id = 0;
+        cellules[70].id = 4;
+        cellules[71].id = 2;
+
+        cellules[72].id = 2;
+        cellules[73].id = 4;
+        cellules[74].id = 6;
+        cellules[75].id = 0;
+        cellules[76].id = 0;
+        cellules[77].id = 3;
+        cellules[78].id = 8;
+        cellules[79].id = 7;
+        cellules[80].id = 0;
+
+        cellules[0].innerHTML = 4;
+        cellules[4].innerHTML = 9;
+        cellules[5].innerHTML = 1;
+        cellules[11].innerHTML = 9;
+        cellules[14].innerHTML = 7;
+        cellules[15].innerHTML = 4;
+        cellules[16].innerHTML = 2;
+        cellules[17].innerHTML = 5;
+        cellules[19].innerHTML = 5;
+        cellules[20].innerHTML = 8;
+        cellules[21].innerHTML = 3;
+        cellules[22].innerHTML = 4;
+        cellules[24].innerHTML = 1;
+        cellules[25].innerHTML = 9;
+        cellules[27].innerHTML = 6;
+        cellules[28].innerHTML = 9;
+        cellules[29].innerHTML = 1;
+        cellules[38].innerHTML = 3;
+        cellules[39].innerHTML = 9;
+        cellules[40].innerHTML = 6;
+        cellules[41].innerHTML = 4;
+        cellules[42].innerHTML = 7;
+        cellules[51].innerHTML = 9;
+        cellules[52].innerHTML = 6;
+        cellules[53].innerHTML = 3;
+        cellules[55].innerHTML = 8;
+        cellules[56].innerHTML = 7;
+        cellules[58].innerHTML = 2;
+        cellules[59].innerHTML = 6;
+        cellules[60].innerHTML = 5;
+        cellules[61].innerHTML = 3;
+        cellules[63].innerHTML = 3;
+        cellules[64].innerHTML = 1;
+        cellules[65].innerHTML = 5;
+        cellules[66].innerHTML = 8;
+        cellules[69].innerHTML = 6;
+        cellules[75].innerHTML = 1;
+        cellules[76].innerHTML = 5;
+        cellules[80].innerHTML = 9;
+      }
+    
+    }
+
+    //Fonction qui permet de renitialiser le niveau
+    function recommencer(event) {
+      let cellules = obtenirCellules();
+      let defaite = document.getElementById("defaite");
+        defaite.innerHTML = "";
+      for (let i = 0; i < cellules.length; i++) {
+        if (cellules[i].id != 0) {
+              cellules[i].innerHTML = ""
+        }
+      }
+      let afficherVie = document.getElementById("vie");
+        afficherVie.innerHTML = "Vie : 5";
+        vie = 5
+    }
+
+    //Fonction qui permet de passer au niveau suivant
+    function suivant(event){
+      niveau ++
+      let titre = document.getElementById("titre");
+        titre.innerHTML = "Sudoku : Niveau " + niveau;
+      let cellules = obtenirCellules();
+      let defaite = document.getElementById("defaite");
+        defaite.innerHTML = "";
+      for (let i = 0; i < cellules.length; i++) {
+              cellules[i].innerHTML = ""
+      }
+
+      //Grille qui change en fonction du niveau
+      if (titre.innerHTML === "Sudoku : Niveau 1") {
+        cellules[0].id = 0;
+        cellules[1].id = 6;
+        cellules[2].id = 2;
+        cellules[3].id = 5;
+        cellules[4].id = 0;
+        cellules[5].id = 0;
+        cellules[6].id = 3;
+        cellules[7].id = 8;
+        cellules[8].id = 7;
+
+        cellules[9].id = 1;
+        cellules[10].id = 3;
+        cellules[11].id = 0;
+        cellules[12].id = 6;
+        cellules[13].id = 8;
+        cellules[14].id = 0;
+        cellules[15].id = 0;
+        cellules[16].id = 0;
+        cellules[17].id = 0;
+
+        cellules[18].id = 7;
+        cellules[19].id = 0;
+        cellules[20].id = 0;
+        cellules[21].id = 0;
+        cellules[22].id = 0;
+        cellules[23].id = 2;
+        cellules[24].id = 0;
+        cellules[25].id = 0;
+        cellules[26].id = 6;
+
+        cellules[27].id = 0;
+        cellules[28].id = 0;
+        cellules[29].id = 0;
+        cellules[30].id = 7;
+        cellules[31].id = 3;
+        cellules[32].id = 8;
+        cellules[33].id = 2;
+        cellules[34].id = 5;
+        cellules[35].id = 4;
+
+        cellules[36].id = 5;
+        cellules[37].id = 2;
+        cellules[38].id = 0;
+        cellules[39].id = 0;
+        cellules[40].id = 0;
+        cellules[41].id = 0;
+        cellules[42].id = 0;
+        cellules[43].id = 1;
+        cellules[44].id = 8;
+
+        cellules[45].id = 8;
+        cellules[46].id = 7;
+        cellules[47].id = 4;
+        cellules[48].id = 2;
+        cellules[49].id = 1;
+        cellules[50].id = 5;
+        cellules[51].id = 0;
+        cellules[52].id = 0;
+        cellules[53].id = 0;
+
+        cellules[54].id = 9;
+        cellules[55].id = 0;
+        cellules[56].id = 0;
+        cellules[57].id = 4;
+        cellules[58].id = 0;
+        cellules[59].id = 0;
+        cellules[60].id = 0;
+        cellules[61].id = 0;
+        cellules[62].id = 1;
+
+        cellules[63].id = 0;
+        cellules[64].id = 0;
+        cellules[65].id = 0;
+        cellules[66].id = 0;
+        cellules[67].id = 7;
+        cellules[68].id = 9;
+        cellules[69].id = 0;
+        cellules[70].id = 4;
+        cellules[71].id = 2;
+
+        cellules[72].id = 2;
+        cellules[73].id = 4;
+        cellules[74].id = 6;
+        cellules[75].id = 0;
+        cellules[76].id = 0;
+        cellules[77].id = 3;
+        cellules[78].id = 8;
+        cellules[79].id = 7;
+        cellules[80].id = 0;
+
+        cellules[0].innerHTML = 4;
+        cellules[4].innerHTML = 9;
+        cellules[5].innerHTML = 1;
+        cellules[11].innerHTML = 9;
+        cellules[14].innerHTML = 7;
+        cellules[15].innerHTML = 4;
+        cellules[16].innerHTML = 2;
+        cellules[17].innerHTML = 5;
+        cellules[19].innerHTML = 5;
+        cellules[20].innerHTML = 8;
+        cellules[21].innerHTML = 3;
+        cellules[22].innerHTML = 4;
+        cellules[24].innerHTML = 1;
+        cellules[25].innerHTML = 9;
+        cellules[27].innerHTML = 6;
+        cellules[28].innerHTML = 9;
+        cellules[29].innerHTML = 1;
+        cellules[38].innerHTML = 3;
+        cellules[39].innerHTML = 9;
+        cellules[40].innerHTML = 6;
+        cellules[41].innerHTML = 4;
+        cellules[42].innerHTML = 7;
+        cellules[51].innerHTML = 9;
+        cellules[52].innerHTML = 6;
+        cellules[53].innerHTML = 3;
+        cellules[55].innerHTML = 8;
+        cellules[56].innerHTML = 7;
+        cellules[58].innerHTML = 2;
+        cellules[59].innerHTML = 6;
+        cellules[60].innerHTML = 5;
+        cellules[61].innerHTML = 3;
+        cellules[63].innerHTML = 3;
+        cellules[64].innerHTML = 1;
+        cellules[65].innerHTML = 5;
+        cellules[66].innerHTML = 8;
+        cellules[69].innerHTML = 6;
+        cellules[75].innerHTML = 1;
+        cellules[76].innerHTML = 5;
+        cellules[80].innerHTML = 9;
+      
+      let rien = document.getElementById("rien");
+        rien.innerHTML = "";
+      }
+
+      else {
+        if (titre.innerHTML === "Sudoku : Niveau 2") {
+          cellules[0].id = 0;
+          cellules[1].id = 7;
+          cellules[2].id = 0;
+          cellules[3].id = 5;
+          cellules[4].id = 0;
+          cellules[5].id = 0;
+          cellules[6].id = 2;
+          cellules[7].id = 4;
+          cellules[8].id = 0;
+
+          cellules[9].id = 1;
+          cellules[10].id = 0;
+          cellules[11].id = 0;
+          cellules[12].id = 6;
+          cellules[13].id = 4;
+          cellules[14].id = 2;
+          cellules[15].id = 7;
+          cellules[16].id = 0;
+          cellules[17].id = 3;
+
+          cellules[18].id = 2;
+          cellules[19].id = 0;
+          cellules[20].id = 4;
+          cellules[21].id = 7;
+          cellules[22].id = 9;
+          cellules[23].id = 8;
+          cellules[24].id = 5;
+          cellules[25].id = 0;
+          cellules[26].id = 6;
+
+          cellules[27].id = 7;
+          cellules[28].id = 0;
+          cellules[29].id = 1;
+          cellules[30].id = 0;
+          cellules[31].id = 3;
+          cellules[32].id = 5;
+          cellules[33].id = 0;
+          cellules[34].id = 0;
+          cellules[35].id = 4;
+
+          cellules[36].id = 8;
+          cellules[37].id = 2;
+          cellules[38].id = 0;
+          cellules[39].id = 0;
+          cellules[40].id = 7;
+          cellules[41].id = 0;
+          cellules[42].id = 0;
+          cellules[43].id = 6;
+          cellules[44].id = 5;
+
+          cellules[45].id = 5;
+          cellules[46].id = 0;
+          cellules[47].id = 0;
+          cellules[48].id = 1;
+          cellules[49].id = 2;
+          cellules[50].id = 0;
+          cellules[51].id = 8;
+          cellules[52].id = 0;
+          cellules[53].id = 7;
+
+          cellules[54].id = 6;
+          cellules[55].id = 0;
+          cellules[56].id = 7;
+          cellules[57].id = 3;
+          cellules[58].id = 5;
+          cellules[59].id = 1;
+          cellules[60].id = 4;
+          cellules[61].id = 0;
+          cellules[62].id = 2;
+
+          cellules[63].id = 3;
+          cellules[64].id = 0;
+          cellules[65].id = 5;
+          cellules[66].id = 2;
+          cellules[67].id = 8;
+          cellules[68].id = 4;
+          cellules[69].id = 0;
+          cellules[70].id = 0;
+          cellules[71].id = 9;
+
+          cellules[72].id = 0;
+          cellules[73].id = 8;
+          cellules[74].id = 2;
+          cellules[75].id = 0;
+          cellules[76].id = 0;
+          cellules[77].id = 7;
+          cellules[78].id = 0;
+          cellules[79].id = 5;
+          cellules[80].id = 0;
+
+          cellules[0].innerHTML = 9;
+          cellules[2].innerHTML = 6;
+          cellules[4].innerHTML = 1;
+          cellules[5].innerHTML = 3;
+          cellules[8].innerHTML = 8;
+          cellules[10].innerHTML = 5;
+          cellules[11].innerHTML = 8;
+          cellules[16].innerHTML = 9;
+          cellules[19].innerHTML = 3;
+          cellules[25].innerHTML = 1;
+          cellules[28].innerHTML = 6;
+          cellules[30].innerHTML = 8;
+          cellules[33].innerHTML = 9;
+          cellules[34].innerHTML = 2;
+          cellules[38].innerHTML = 3;
+          cellules[39].innerHTML = 4;
+          cellules[41].innerHTML = 9;
+          cellules[42].innerHTML = 1;
+          cellules[46].innerHTML = 4;
+          cellules[47].innerHTML = 9;
+          cellules[50].innerHTML = 6;
+          cellules[52].innerHTML = 3;
+          cellules[55].innerHTML = 9;
+          cellules[61].innerHTML = 8;
+          cellules[64].innerHTML = 1;
+          cellules[69].innerHTML = 6;
+          cellules[70].innerHTML = 7;
+          cellules[72].innerHTML = 4;
+          cellules[75].innerHTML = 9;
+          cellules[76].innerHTML = 6;
+          cellules[78].innerHTML = 3;
+          cellules[80].innerHTML = 1;
+
+        let rien = document.getElementById("rien");
+          rien.innerHTML = "";
+        }
+        else {
+          if (titre.innerHTML === "Sudoku : Niveau 3") {
+            cellules[0].id = 8;
+            cellules[1].id = 3;
+            cellules[2].id = 4;
+            cellules[3].id = 0;
+            cellules[4].id = 1;
+            cellules[5].id = 2;
+            cellules[6].id = 7;
+            cellules[7].id = 9;
+            cellules[8].id = 0;
+
+            cellules[9].id = 6;
+            cellules[10].id = 1;
+            cellules[11].id = 5;
+            cellules[12].id = 0;
+            cellules[13].id = 0;
+            cellules[14].id = 9;
+            cellules[15].id = 0;
+            cellules[16].id = 4;
+            cellules[17].id = 0;
+
+            cellules[18].id = 0;
+            cellules[19].id = 0;
+            cellules[20].id = 9;
+            cellules[21].id = 0;
+            cellules[22].id = 4;
+            cellules[23].id = 6;
+            cellules[24].id = 5;
+            cellules[25].id = 0;
+            cellules[26].id = 0;
+
+            cellules[27].id = 1;
+            cellules[28].id = 5;
+            cellules[29].id = 2;
+            cellules[30].id = 6;
+            cellules[31].id = 0;
+            cellules[32].id = 0;
+            cellules[33].id = 0;
+            cellules[34].id = 7;
+            cellules[35].id = 8;
+
+            cellules[36].id = 0;
+            cellules[37].id = 0;
+            cellules[38].id = 0;
+            cellules[39].id = 2;
+            cellules[40].id = 0;
+            cellules[41].id = 8;
+            cellules[42].id = 0;
+            cellules[43].id = 0;
+            cellules[44].id = 0;
+
+            cellules[45].id = 4;
+            cellules[46].id = 6;
+            cellules[47].id = 0;
+            cellules[48].id = 0;
+            cellules[49].id = 0;
+            cellules[50].id = 1;
+            cellules[51].id = 2;
+            cellules[52].id = 3;
+            cellules[53].id = 5;
+
+            cellules[54].id = 0;
+            cellules[55].id = 0;
+            cellules[56].id = 1;
+            cellules[57].id = 4;
+            cellules[58].id = 6;
+            cellules[59].id = 0;
+            cellules[60].id = 8;
+            cellules[61].id = 0;
+            cellules[62].id = 0;
+
+            cellules[63].id = 0;
+            cellules[64].id = 3;
+            cellules[65].id = 0;
+            cellules[66].id = 9;
+            cellules[67].id = 0;
+            cellules[68].id = 0;
+            cellules[69].id = 1;
+            cellules[70].id = 2;
+            cellules[71].id = 3;
+
+            cellules[72].id = 0;
+            cellules[73].id = 8;
+            cellules[74].id = 7;
+            cellules[75].id = 1;
+            cellules[76].id = 2;
+            cellules[77].id = 0;
+            cellules[78].id = 4;
+            cellules[79].id = 6;
+            cellules[80].id = 9;
+
+            cellules[3].innerHTML = 5;
+            cellules[8].innerHTML = 6;
+            cellules[12].innerHTML = 8;
+            cellules[13].innerHTML = 7;
+            cellules[15].innerHTML = 3;
+            cellules[17].innerHTML = 2;
+            cellules[18].innerHTML = 2;
+            cellules[19].innerHTML = 7;
+            cellules[21].innerHTML = 3;
+            cellules[25].innerHTML = 8;
+            cellules[26].innerHTML = 1;
+            cellules[31].innerHTML = 3;
+            cellules[32].innerHTML = 4;
+            cellules[33].innerHTML = 9;
+            cellules[36].innerHTML = 7;
+            cellules[37].innerHTML = 9;
+            cellules[38].innerHTML = 3;
+            cellules[40].innerHTML = 5;
+            cellules[42].innerHTML = 6;
+            cellules[43].innerHTML = 1;
+            cellules[44].innerHTML = 3;
+            cellules[47].innerHTML = 8;
+            cellules[48].innerHTML = 7;
+            cellules[49].innerHTML = 9;
+            cellules[54].innerHTML = 9;
+            cellules[55].innerHTML = 2;
+            cellules[59].innerHTML = 3;
+            cellules[61].innerHTML = 5;
+            cellules[62].innerHTML = 7;
+            cellules[63].innerHTML = 5;
+            cellules[65].innerHTML = 6;
+            cellules[67].innerHTML = 8;
+            cellules[68].innerHTML = 7;
+            cellules[72].innerHTML = 3;
+            cellules[77].innerHTML = 5;
+
+          let rien = document.getElementById("rien");
+            rien.innerHTML = "";
+          }
+
+          else {
+            let rien = document.getElementById("rien");
+              rien.innerHTML = "Malheureusement, aucun autre niveau n'est disponible pour le moment. Merci d'avoir joué au sudoku.";
+          }
+        }
+      }
+    
+    //Renitialisation de la vie
+    let afficherVie = document.getElementById("vie");
+        afficherVie.innerHTML = "Vie : 5";
+        vie = 5
+    }
+
+    //Fonction qui permet de retourner au niveau précédent
+    function precedent(event){
+      niveau -= 1
+      let titre = document.getElementById("titre");
+      titre.innerHTML = "Sudoku : Niveau " + niveau;
+      let cellules = obtenirCellules();
+      let defaite = document.getElementById("defaite");
+        defaite.innerHTML = "";
+      for (let i = 0; i < cellules.length; i++) {
+              cellules[i].innerHTML = ""
+        }
+
+        if (titre.innerHTML === "Sudoku : Niveau 1") {
+        cellules[0].id = 0;
+        cellules[1].id = 6;
+        cellules[2].id = 2;
+        cellules[3].id = 5;
+        cellules[4].id = 0;
+        cellules[5].id = 0;
+        cellules[6].id = 3;
+        cellules[7].id = 8;
+        cellules[8].id = 7;
+
+        cellules[9].id = 1;
+        cellules[10].id = 3;
+        cellules[11].id = 0;
+        cellules[12].id = 6;
+        cellules[13].id = 8;
+        cellules[14].id = 0;
+        cellules[15].id = 0;
+        cellules[16].id = 0;
+        cellules[17].id = 0;
+
+        cellules[18].id = 7;
+        cellules[19].id = 0;
+        cellules[20].id = 0;
+        cellules[21].id = 0;
+        cellules[22].id = 0;
+        cellules[23].id = 2;
+        cellules[24].id = 0;
+        cellules[25].id = 0;
+        cellules[26].id = 6;
+
+        cellules[27].id = 0;
+        cellules[28].id = 0;
+        cellules[29].id = 0;
+        cellules[30].id = 7;
+        cellules[31].id = 3;
+        cellules[32].id = 8;
+        cellules[33].id = 2;
+        cellules[34].id = 5;
+        cellules[35].id = 4;
+
+        cellules[36].id = 5;
+        cellules[37].id = 2;
+        cellules[38].id = 0;
+        cellules[39].id = 0;
+        cellules[40].id = 0;
+        cellules[41].id = 0;
+        cellules[42].id = 0;
+        cellules[43].id = 1;
+        cellules[44].id = 8;
+
+        cellules[45].id = 8;
+        cellules[46].id = 7;
+        cellules[47].id = 4;
+        cellules[48].id = 2;
+        cellules[49].id = 1;
+        cellules[50].id = 5;
+        cellules[51].id = 0;
+        cellules[52].id = 0;
+        cellules[53].id = 0;
+
+        cellules[54].id = 9;
+        cellules[55].id = 0;
+        cellules[56].id = 0;
+        cellules[57].id = 4;
+        cellules[58].id = 0;
+        cellules[59].id = 0;
+        cellules[60].id = 0;
+        cellules[61].id = 0;
+        cellules[62].id = 1;
+
+        cellules[63].id = 0;
+        cellules[64].id = 0;
+        cellules[65].id = 0;
+        cellules[66].id = 0;
+        cellules[67].id = 7;
+        cellules[68].id = 9;
+        cellules[69].id = 0;
+        cellules[70].id = 4;
+        cellules[71].id = 2;
+
+        cellules[72].id = 2;
+        cellules[73].id = 4;
+        cellules[74].id = 6;
+        cellules[75].id = 0;
+        cellules[76].id = 0;
+        cellules[77].id = 3;
+        cellules[78].id = 8;
+        cellules[79].id = 7;
+        cellules[80].id = 0;
+
+        cellules[0].innerHTML = 4;
+        cellules[4].innerHTML = 9;
+        cellules[5].innerHTML = 1;
+        cellules[11].innerHTML = 9;
+        cellules[14].innerHTML = 7;
+        cellules[15].innerHTML = 4;
+        cellules[16].innerHTML = 2;
+        cellules[17].innerHTML = 5;
+        cellules[19].innerHTML = 5;
+        cellules[20].innerHTML = 8;
+        cellules[21].innerHTML = 3;
+        cellules[22].innerHTML = 4;
+        cellules[24].innerHTML = 1;
+        cellules[25].innerHTML = 9;
+        cellules[27].innerHTML = 6;
+        cellules[28].innerHTML = 9;
+        cellules[29].innerHTML = 1;
+        cellules[38].innerHTML = 3;
+        cellules[39].innerHTML = 9;
+        cellules[40].innerHTML = 6;
+        cellules[41].innerHTML = 4;
+        cellules[42].innerHTML = 7;
+        cellules[51].innerHTML = 9;
+        cellules[52].innerHTML = 6;
+        cellules[53].innerHTML = 3;
+        cellules[55].innerHTML = 8;
+        cellules[56].innerHTML = 7;
+        cellules[58].innerHTML = 2;
+        cellules[59].innerHTML = 6;
+        cellules[60].innerHTML = 5;
+        cellules[61].innerHTML = 3;
+        cellules[63].innerHTML = 3;
+        cellules[64].innerHTML = 1;
+        cellules[65].innerHTML = 5;
+        cellules[66].innerHTML = 8;
+        cellules[69].innerHTML = 6;
+        cellules[75].innerHTML = 1;
+        cellules[76].innerHTML = 5;
+        cellules[80].innerHTML = 9;
+
+        let rien = document.getElementById("rien");
+        rien.innerHTML = "";
+      }
+      else {
+        if (titre.innerHTML === "Sudoku : Niveau 2") {
+          cellules[0].id = 0;
+          cellules[1].id = 7;
+          cellules[2].id = 0;
+          cellules[3].id = 5;
+          cellules[4].id = 0;
+          cellules[5].id = 0;
+          cellules[6].id = 2;
+          cellules[7].id = 4;
+          cellules[8].id = 0;
+
+          cellules[9].id = 1;
+          cellules[10].id = 0;
+          cellules[11].id = 0;
+          cellules[12].id = 6;
+          cellules[13].id = 4;
+          cellules[14].id = 2;
+          cellules[15].id = 7;
+          cellules[16].id = 0;
+          cellules[17].id = 3;
+
+          cellules[18].id = 2;
+          cellules[19].id = 0;
+          cellules[20].id = 4;
+          cellules[21].id = 7;
+          cellules[22].id = 9;
+          cellules[23].id = 8;
+          cellules[24].id = 5;
+          cellules[25].id = 0;
+          cellules[26].id = 6;
+
+          cellules[27].id = 7;
+          cellules[28].id = 0;
+          cellules[29].id = 1;
+          cellules[30].id = 0;
+          cellules[31].id = 3;
+          cellules[32].id = 5;
+          cellules[33].id = 0;
+          cellules[34].id = 0;
+          cellules[35].id = 4;
+
+          cellules[36].id = 8;
+          cellules[37].id = 2;
+          cellules[38].id = 0;
+          cellules[39].id = 0;
+          cellules[40].id = 7;
+          cellules[41].id = 0;
+          cellules[42].id = 0;
+          cellules[43].id = 6;
+          cellules[44].id = 5;
+
+          cellules[45].id = 5;
+          cellules[46].id = 0;
+          cellules[47].id = 0;
+          cellules[48].id = 1;
+          cellules[49].id = 2;
+          cellules[50].id = 0;
+          cellules[51].id = 8;
+          cellules[52].id = 0;
+          cellules[53].id = 7;
+
+          cellules[54].id = 6;
+          cellules[55].id = 0;
+          cellules[56].id = 7;
+          cellules[57].id = 3;
+          cellules[58].id = 5;
+          cellules[59].id = 1;
+          cellules[60].id = 4;
+          cellules[61].id = 0;
+          cellules[62].id = 2;
+
+          cellules[63].id = 3;
+          cellules[64].id = 0;
+          cellules[65].id = 5;
+          cellules[66].id = 2;
+          cellules[67].id = 8;
+          cellules[68].id = 4;
+          cellules[69].id = 0;
+          cellules[70].id = 0;
+          cellules[71].id = 9;
+
+          cellules[72].id = 0;
+          cellules[73].id = 8;
+          cellules[74].id = 2;
+          cellules[75].id = 0;
+          cellules[76].id = 0;
+          cellules[77].id = 7;
+          cellules[78].id = 0;
+          cellules[79].id = 5;
+          cellules[80].id = 0;
+
+          cellules[0].innerHTML = 9;
+          cellules[2].innerHTML = 6;
+          cellules[4].innerHTML = 1;
+          cellules[5].innerHTML = 3;
+          cellules[8].innerHTML = 8;
+          cellules[10].innerHTML = 5;
+          cellules[11].innerHTML = 8;
+          cellules[16].innerHTML = 9;
+          cellules[19].innerHTML = 3;
+          cellules[25].innerHTML = 1;
+          cellules[28].innerHTML = 6;
+          cellules[30].innerHTML = 8;
+          cellules[33].innerHTML = 9;
+          cellules[34].innerHTML = 2;
+          cellules[38].innerHTML = 3;
+          cellules[39].innerHTML = 4;
+          cellules[41].innerHTML = 9;
+          cellules[42].innerHTML = 1;
+          cellules[46].innerHTML = 4;
+          cellules[47].innerHTML = 9;
+          cellules[50].innerHTML = 6;
+          cellules[52].innerHTML = 3;
+          cellules[55].innerHTML = 9;
+          cellules[61].innerHTML = 8;
+          cellules[64].innerHTML = 1;
+          cellules[69].innerHTML = 6;
+          cellules[70].innerHTML = 7;
+          cellules[72].innerHTML = 4;
+          cellules[75].innerHTML = 9;
+          cellules[76].innerHTML = 6;
+          cellules[78].innerHTML = 3;
+          cellules[80].innerHTML = 1;
+
+          let rien = document.getElementById("rien");
+          rien.innerHTML = "";
+        }
+        else {
+          if (titre.innerHTML === "Sudoku : Niveau 3") {
+            cellules[0].id = 8;
+            cellules[1].id = 3;
+            cellules[2].id = 4;
+            cellules[3].id = 0;
+            cellules[4].id = 1;
+            cellules[5].id = 2;
+            cellules[6].id = 7;
+            cellules[7].id = 9;
+            cellules[8].id = 0;
+
+            cellules[9].id = 6;
+            cellules[10].id = 1;
+            cellules[11].id = 5;
+            cellules[12].id = 0;
+            cellules[13].id = 0;
+            cellules[14].id = 9;
+            cellules[15].id = 0;
+            cellules[16].id = 4;
+            cellules[17].id = 0;
+
+            cellules[18].id = 0;
+            cellules[19].id = 0;
+            cellules[20].id = 9;
+            cellules[21].id = 0;
+            cellules[22].id = 4;
+            cellules[23].id = 6;
+            cellules[24].id = 5;
+            cellules[25].id = 0;
+            cellules[26].id = 0;
+
+            cellules[27].id = 1;
+            cellules[28].id = 5;
+            cellules[29].id = 2;
+            cellules[30].id = 6;
+            cellules[31].id = 0;
+            cellules[32].id = 0;
+            cellules[33].id = 0;
+            cellules[34].id = 7;
+            cellules[35].id = 8;
+
+            cellules[36].id = 0;
+            cellules[37].id = 0;
+            cellules[38].id = 0;
+            cellules[39].id = 2;
+            cellules[40].id = 0;
+            cellules[41].id = 8;
+            cellules[42].id = 0;
+            cellules[43].id = 0;
+            cellules[44].id = 0;
+
+            cellules[45].id = 4;
+            cellules[46].id = 6;
+            cellules[47].id = 0;
+            cellules[48].id = 0;
+            cellules[49].id = 0;
+            cellules[50].id = 1;
+            cellules[51].id = 2;
+            cellules[52].id = 3;
+            cellules[53].id = 5;
+
+            cellules[54].id = 0;
+            cellules[55].id = 0;
+            cellules[56].id = 1;
+            cellules[57].id = 4;
+            cellules[58].id = 6;
+            cellules[59].id = 0;
+            cellules[60].id = 8;
+            cellules[61].id = 0;
+            cellules[62].id = 0;
+
+            cellules[63].id = 0;
+            cellules[64].id = 3;
+            cellules[65].id = 0;
+            cellules[66].id = 9;
+            cellules[67].id = 0;
+            cellules[68].id = 0;
+            cellules[69].id = 1;
+            cellules[70].id = 2;
+            cellules[71].id = 3;
+
+            cellules[72].id = 0;
+            cellules[73].id = 8;
+            cellules[74].id = 7;
+            cellules[75].id = 1;
+            cellules[76].id = 2;
+            cellules[77].id = 0;
+            cellules[78].id = 4;
+            cellules[79].id = 6;
+            cellules[80].id = 9;
+
+            cellules[3].innerHTML = 5;
+            cellules[8].innerHTML = 6;
+            cellules[12].innerHTML = 8;
+            cellules[13].innerHTML = 7;
+            cellules[15].innerHTML = 3;
+            cellules[17].innerHTML = 2;
+            cellules[18].innerHTML = 2;
+            cellules[19].innerHTML = 7;
+            cellules[21].innerHTML = 3;
+            cellules[25].innerHTML = 8;
+            cellules[26].innerHTML = 1;
+            cellules[31].innerHTML = 3;
+            cellules[32].innerHTML = 4;
+            cellules[33].innerHTML = 9;
+            cellules[36].innerHTML = 7;
+            cellules[37].innerHTML = 9;
+            cellules[38].innerHTML = 3;
+            cellules[40].innerHTML = 5;
+            cellules[42].innerHTML = 6;
+            cellules[43].innerHTML = 1;
+            cellules[44].innerHTML = 3;
+            cellules[47].innerHTML = 8;
+            cellules[48].innerHTML = 7;
+            cellules[49].innerHTML = 9;
+            cellules[54].innerHTML = 9;
+            cellules[55].innerHTML = 2;
+            cellules[59].innerHTML = 3;
+            cellules[61].innerHTML = 5;
+            cellules[62].innerHTML = 7;
+            cellules[63].innerHTML = 5;
+            cellules[65].innerHTML = 6;
+            cellules[67].innerHTML = 8;
+            cellules[68].innerHTML = 7;
+            cellules[72].innerHTML = 3;
+            cellules[77].innerHTML = 5;
+            
+            let rien = document.getElementById("rien");
+            rien.innerHTML = "";
+          }
+          else {
+            let rien = document.getElementById("rien");
+          rien.innerHTML = "Malheureusement, aucun autre niveau n'est disponible pour le moment. Merci d'avoir joué au sudoku.";
+          }
+      }
+    }
+    let afficherVie = document.getElementById("vie");
+        afficherVie.innerHTML = "Vie : 5";
+        vie = 5
+  }
+  
+    //Fonction qui ajoute un "?" dans la cellule cliqué (lorsque le contenu de cette cellule est vide et lorsqu'aucune autre cellule n'est séléctionnée)
+    function clickSurCellule(event) {
+        let contenu = event.target.innerHTML;
+        if (contenu === "" && !autreCelluleSelectionnee()){
+          event.target.innerHTML = "?";
+        }
+    }
+
+    //Fonction qui vérifie qu'aucune (autre) cellule n'est séléctionnée
+    function autreCelluleSelectionnee() {
+      let cellules = obtenirCellules();
+      for (let i = 0; i < cellules.length; i++) {
+            if (cellules[i].innerHTML=== "?") {
+              return true
+            }
+      } 
+    }
+
+    //Fonction qui remplace le "?" par le chiffre séléctionné lorsque c'est le bon (qui enlève de la vie lorsque c'est faux
+    //et qui stop la partie lorsque le joueur n'a plus de vie)
+    function afficherChiffre(event) {
+      let cellules = obtenirCellules();
+      let afficherVie = document.getElementById("vie");
+      for (let i = 0; i < cellules.length; i++) {
+            if (cellules[i].innerHTML=== "?") {
+              if (this.innerHTML === cellules[i].id && vie > 0) {
+                cellules[i].innerHTML = this.innerHTML;
+              }
+              else {
+                if (vie > 0) {
+                  cellules[i].innerHTML = "";
+                  vie -= 1;
+                  afficherVie.innerHTML = "Vie : " + vie;
+                }
+                else {
+                  estPerdu()
+                }
+            }
+            }
+          }
+    }
+
+    //Fonction qui affiche un message lorsque la partie est perdue 
+    function estPerdu() {
+      let defaite = document.getElementById("defaite");
+        defaite.innerHTML = "Perdu ! Vous avez épuisé toutes vos vies"
+      return true
+    }
+
+    function obtenirCellules() {
+        //Affecte tout les élément qui ont l'id "tableau" dans le document à la variable morpion
+        let tableau = document.getElementById("tableau");
+        //Renvoie tout les éléments qui ont pour nom "td" dans tableau
+        return tableau.getElementsByTagName("td");
+    }
+
+    //Fonction qui renvoie tout les éléments qui ont pour nom "button" dans le document
+    function obtenirBoutons() {
+      return document.getElementsByTagName("button");
+    }
+
+</script>
+</body>
+</html>

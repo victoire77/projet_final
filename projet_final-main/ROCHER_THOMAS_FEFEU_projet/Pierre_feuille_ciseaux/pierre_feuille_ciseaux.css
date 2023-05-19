@@ -1,0 +1,123 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 40px;
+  background-color: #fefee2;
+}
+
+.box {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.box > div {
+  flex: 1;
+}
+
+#resultat {
+  font-size: 30px;
+  font-weight: bold;
+  position: absolute;
+  left: 600px;
+  top: 200px;
+  color: #7b38d8;
+}
+
+button {
+  padding: 20px 30px;
+  font-size: 20px;
+}
+
+#ordinateur,
+#player {
+  margin-top: 30px;
+}
+
+#player_button {
+  display: flex;
+  justify-content: center;
+}
+
+#choix_ordi {
+  background-color: rgb(192, 192, 192);
+}
+
+#choix_ordi:hover{
+  background-color: rgb(192, 192, 192);
+}
+
+#player_button button {
+  margin: 0 10px;
+}
+
+#pierre_joueur {
+  background-color: #e74c3c;
+  color: white;
+  cursor: pointer;
+}
+
+#pierre_joueur:hover{
+  background-color: #df5d4f;
+}
+
+#feuille_joueur {
+  background-color: #3498db;
+  color: white;
+  cursor: pointer;
+}
+
+#feuille_joueur:hover{
+  background-color: #53a5db;
+}
+
+#ciseaux_joueur {
+  background-color: #2ecc71;
+  color: white;
+  cursor: pointer;
+}
+
+#ciseaux_joueur:hover{
+  background-color: #56ce88;
+}
+
+#rejouer {
+  margin-top: 30px;
+  background-color: #2980b9;
+  color: white;
+  font-size: 1rem;
+  color: #000000;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  border-radius: 10px;
+  border: 2px solid #000000;
+  background: #ffffff;
+  box-shadow: 1px 1px #000000;
+  cursor: pointer;
+  position:relative;
+  margin-top:170px;
+  left:40px;
+}
+
+button:active {
+  box-shadow: none;
+  transform: translate(3px, 3px);
+}
+ 
+#retour {
+  font-size: 1rem;
+  color: #000000;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  border-radius: 10px;
+  border: 2px solid #000000;
+  background: #ffffff;
+  box-shadow: 1px 1px #000000;
+  cursor: pointer;
+  position:relative;
+  bottom:-150px;
+  left:-580px;
+}
+
