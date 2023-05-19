@@ -1,0 +1,86 @@
+ /*
+liens utiles 
+https://fr.w3docs.com/snippets/css/comment-styler-les-boutons-avec-css.html
+https://www.pierre-giraud.com/html-css-apprendre-coder-cours/position/
+https://developer.mozilla.org/fr/docs/Web/CSS/flex
+
+
+*/
+body {
+
+  font-family: Arial, sans-serif;
+  background-color: beige;
+  margin: 40px;
+}
+
+#boutons {
+  align-items: center;
+  justify-items: center;
+  border: 1px solid #333;
+  border-radius: 10px;
+  text-align: center;
+  width: 660px;
+  height: 220px;
+  margin: 20px;
+  padding:10px;
+  display: table;
+  clear: both;
+  display: inline-block;
+  background-color: white;
+}
+
+#choix1, #choix2, #choix3 {
+  border: 1px solid #333;
+  border-radius: 20px;
+  background-color: #7b38d8;
+  cursor: pointer;
+  float: left;
+  padding: 10px;  
+  width: 200px;
+  height: 200px; 
+  margin: 10px;
+  font-size: 15px;
+}
+
+#images {
+  border: 1px solid #333;
+  border-radius: 20px; 
+  text-align: center;
+  padding: 20px;
+  width: 410px;
+  height: 270px; 
+  background-color: white;
+  display: inline-block;
+}
+
+#image1, #image2, #image3, #image4, #image5, #image6, #image7, #image_finale {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.aParent div {
+
+  width: 100%;
+  text-align: center;
+}
+
+#retour {
+  font-size: 1rem;
+  color: #000000;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  border-radius: 10px;
+  border: 2px solid #000000;
+  background: #ffffff;
+  box-shadow: 1px 1px #000000;
+  cursor: pointer;
+  margin: 20px 0;
+}
+
+button:active {
+  box-shadow: none;
+  transform: translate(3px, 3px);
+}
