@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<!--
+    Auteurs : ROCHER Salomé, THOMAS Eliott, FEFEU Marie
+    Il s'agit de la page de règles du Sudoku
+-->
+
+<html>
+
+<head>
+    <html lang="fr">
+    <meta charset="utf-8" />
+    <title> Règles du Sudoku</title>
+    <link href="../regles.css" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+    <h1>Les règles du Sudoku</h1>
+    </header>
+
+    <main>
+    <h3>Avant de jouer voici un récapitulatif des règles du jeu pierre feuille ciseaux. Prenez le temps qu'il vous faudra pour les lire. </br>
+        (Si vous considérez ne pas avoir besoin d'explications ou lorsque vous aurez fini de les lire vous pourrez cliquer sur "Skip" pour accéder au jeu.)
+    </h3>
+
+    <br/>
+    <h2>Quel est le but du jeu ?</h2>
+    <p>Le but est de compléter chaque case de la grille avec un chiffre allant de 1 à 9, en respectant 
+        simultanément 3 contraintes: 
+        <ol>
+            <li>Le chiffre ne doit pas déjà se trouver sur la même colonne. </li>
+            <li>Le chiffre ne doit pas déjà se trouver sur la même ligne.</li>
+            <li>Le chiffre ne doit pas déjà se trouver dans le même bloc.</li>
+        </ol>        
+   </p>
+
+    <br/>
+    <h2>Comment jouer ?</h2>
+    <p>Pour jouer, vous devez cliquer sur la case dont vous pensez avoir trouver le chiffre.
+        Vous cliquez ensuite sur le chiffre que vous pensez avoir deviné. 
+        
+    <br/>S'il s'agit du bon, alors le point d'interrogation sera remplacé par le chiffre choisi.
+    Dans le cas d'une erreur, vous perdez une vie. Vous avez au total 5 vies. 
+    <br/>Si vous les perdez toutes, 
+    vous perdez le jeu.</p>
+
+    <button onclick="window.location.href = 'sudoku.html';">Skip</button>
+    </main>
+    
+
+</body>
+</html>

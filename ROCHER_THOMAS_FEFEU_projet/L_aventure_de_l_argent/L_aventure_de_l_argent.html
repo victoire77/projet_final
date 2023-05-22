@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<!--
+    Auteurs : ROCHER Salomé, THOMAS Eliott, FEFEU Marie
+
+    Ce programme fait incarner au joueur un personnage qui a des problèmes d'argent. 
+    Le but est d'avoir plus d'argent qu'au départ.
+-->
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title> L'aventure de l'argent </title>
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/brython@3.11.0/brython.min.js">
+    </script>
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/brython@3.11.0/brython_stdlib.js">
+    </script>
+    <link rel="stylesheet" href="L_aventure_de_l_argent.css">
+    <link rel="shortcut icon" type="image/png" href="/money.png"/>
+</head>
+
+<body onload="brython()">
+
+<script type="text/python">
+# Import modules et fichiers
+from browser import document, html
+import func_csv
+
+questions = func_csv.to_table()
+i = 0  # i étant le numéro de la question
+values = []
+monnaie = 10000
+images = ["casino", "transport", "investissement", "postuler", "impôts", "loto", "vente"]
+
+# Définition des fonctions
+def nouvelle_question():
+    '''
+    Rôle : Affiche les nouvelles questions et images
+    '''
+    document['question'].textContent = questions[i]['question']
+    document['choix1'].textContent = questions[i]['choix1']       
+    document['choix2'].textContent = questions[i]['choix2']
+    document['choix3'].textContent = questions[i]['choix3']
+    if i==0:
+        document["image1"] <= html.IMG(src=images[i] + ".png", Class="image-aventure")
+    if i==1:
+        del document["image1"]
+        document["image2"] <= html.IMG(src=images[i] + ".png", Class="image-aventure")
+    if i==2:
+        del document["image2"]
+        document["image3"] <= html.IMG(src=images[i] + ".png", Class="image-aventure")
+    if i==3:
+        del document["image3"]
+        document["image4"] <= html.IMG(src=images[i] + ".png", Class="image-aventure")
+    if i==4:
+        del document["image4"]
+        document["image5"] <= html.IMG(src=images[i] + ".png", Class="image-aventure")
+    if i==5:
+        del document["image5"]
+        document["image6"] <= html.IMG(src=images[i] + ".png", Class="image-aventure")
+    if i==6:
+        del document["image6"]
+        document["image7"] <= html.IMG(src=images[i] + ".png", Class="image-aventure")
+
+def nouvelle_action1():
+    '''
+    Rôle : Affiche les résultats de l'action du joueur et la monnaie qu'il lui reste
+    s'il a choisi le premier bouton
+    '''
+    document['action'].textContent = questions[i]['action1']
+    document['monnaie'].textContent = f"Vous avez {monnaie} euros"
+
+
+def nouvelle_action2():
+    '''
+    Rôle : Affiche les résultats de l'action du joueur et la monnaie qu'il lui reste
+    s'il a choisi le deuxième bouton
+    '''
+    document['action'].textContent = questions[i]['action2']
+    document['monnaie'].textContent = f"Vous avez {monnaie} euros"
+
+
+def nouvelle_action3():
+    '''
+    Rôle : Affiche les résultats de l'action du joueur et la monnaie qu'il lui reste
+    s'il a choisi le troisième bouton
+    '''
+    document['action'].textContent = questions[i]['action3']
+    document['monnaie'].textContent = f"Vous avez {monnaie} euros"
+
+def affichage_fin(): 
+    '''
+    Rôle : Affiche s'il le joueur a gagné ou perdu.
+    '''
+    del document["image7"]
+    del document["boutons"]
+    del document["monnaie"]
+    if monnaie > 10000:
+        document["question"].textContent = f"Woaw! Tu as su faire fructifier ton argent. Tu as maintenant \
+        plus d'argent qu'au départ avec un total de {monnaie} euros"
+        document["image_finale"] <= html.IMG(src="riche.png")
+    else:
+        document["question"].textContent = f"Oh non! Tu as perdu de l'argent au cours de cette \
+        aventure. Tu n'as maintenant plus que {monnaie} euros"
+        document["image_finale"] <= html.IMG(src="ruiné.png")
+
+def reponse1(evt):
+    '''
+    Rôle : Calcule la monnaie qu'il lui reste s'il a choisi le premier bouton.
+           Gère s'il reste assez de questions ou pas.
+    '''
+    global i
+    global values     
+    global monnaie  
+
+    question = questions[i]  
+    values.append(int(question['value1'])) 
+    monnaie = monnaie + values[-1]
+
+    if i < len(questions)-1:
+        nouvelle_action1()
+        i = i + 1
+        nouvelle_question()
+    else: 
+        nouvelle_action1()           
+        affichage_fin()
+
+def reponse2(evt):
+    '''
+    Rôle : Calcule la monnaie qu'il lui reste s'il a choisi le deuxième bouton.
+           Gère s'il reste assez de questions ou pas.
+    '''
+    global i
+    global values      
+    global monnaie
+
+    question = questions[i]  
+    values.append(int(question['value2'])) 
+    monnaie = monnaie + values[-1] 
+
+    if i < len(questions)-1:
+        nouvelle_action2()
+        i = i + 1
+        nouvelle_question()
+    else:    
+        nouvelle_action2()        
+        affichage_fin()
+
+def reponse3(evt):
+    '''
+    Rôle : Calcule la monnaie qu'il lui reste s'il a choisi le troisième bouton.
+           Gère s'il reste assez de questions ou pas.
+    '''
+    global i
+    global values 
+    global monnaie
+
+    question = questions[i]  
+    values.append(int(question['value3'])) 
+    monnaie = monnaie + values[-1] 
+
+    if i < len(questions)-1:
+        nouvelle_action3()
+        i = i + 1
+        nouvelle_question()
+    else:            
+        nouvelle_action3()
+        affichage_fin()
+
+# Programme principal avec appel des fonctions
+nouvelle_question()
+
+document['choix1'].bind('click', reponse1)
+document['choix2'].bind('click', reponse2)
+document['choix3'].bind('click', reponse3)
+</script>
+
+<h2><div id="action"></div></h2>
+<h2><div id="question"></div></h2>
+<h2><div id="monnaie"></div></h2>
+<div class="aParent">
+    <div id="boutons">
+        <button name="button" id="choix1"></button>
+        <button name="button" id="choix2"></button>
+        <button name="button" id="choix3"></button> 
+    </div>
+
+    <div id="images">
+        <div id="image1"></div>
+        <div id="image2"></div>
+        <div id="image3"></div>
+        <div id="image4"></div>
+        <div id="image5"></div>
+        <div id="image6"></div>
+        <div id="image7"></div>
+        <div id="image_finale"></div>
+    </div>
+</div>
+<button id="retour" onclick="window.location.href = '../page_html_projet.html';">Retour à la page d'accueil</button>
+</body>
+</html>
